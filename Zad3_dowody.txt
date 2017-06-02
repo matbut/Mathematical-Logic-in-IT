@@ -4,126 +4,150 @@ Variables A B C D : Prop.
 
 Theorem impl_rozdz : (A -> B) -> (A -> C) -> A -> B -> C.
 Proof.
-intros.
-apply H0.
-exact H1.
+intro H.
+intro I.
+intro J.
+intro K.
+apply I.
+exact J.
 Qed.
 
 Theorem impl_komp : (A -> B) -> (B -> C) -> A -> C.
 Proof.
-intros.
-apply H0.
+intro H.
+intro I.
+intro J.
+apply I.
 apply H.
-exact H1.
+exact J.
 Qed.
 
 Theorem impl_perm : (A -> B -> C) -> B -> A -> C. 
 Proof.
-intros.
+intro H.
+intro I.
+intro J.
 apply H.
-exact H1.
-exact H0.
+exact J.
+exact I.
 Qed.
 
 Theorem impl_conj : A -> B -> A /\ B. 
 Proof.
-intros.
+intro H.
+intro I.
 split.
 exact H.
-exact H0.
+exact I.
 Qed.
 
 Theorem conj_elim_l : A /\ B -> A. 
 Proof.
-intros.
+intro H.
 elim H.
-intros.
-exact H0.
+intro I.
+intro J.
+exact I.
 Qed.
 
 Theorem disj_intro_l : A -> A \/ B.
 Proof.
-intros.
+intro H.
 left.
 exact H.
 Qed.
 
 Theorem rozl_elim : A \/ B -> (A -> C) -> (B -> C) -> C. 
 Proof.
-intros.
+intro H.
+intro I.
+intro J.
 elim H.
-exact H0.
-exact H1.
+exact I.
+exact J.
 Qed.
 
 Theorem diamencik : (A -> B) -> (A -> C) -> (B -> C -> D) -> A -> D.
 Proof.
-intros.
-apply H1.
+intro H.
+intro I.
+intro J.
+intro K.
+apply J.
 apply H.
-exact H2.
-apply H0.
-exact H2.
+exact K.
+apply I.
+exact K.
 Qed.
 
 Theorem slaby_peirce : ((((A -> B) -> A) -> A) -> B) -> B.
 Proof.
-intro.
+intro H.
 apply H.
-intro.
-apply H0.
-intro.
+intro I.
+apply I.
+intro J.
 apply H.
-intro.
-exact H1.
+intro K.
+exact J.
 Qed.
 
 Theorem rozl_impl_rozdz : (A \/ B -> C) -> (A -> C) /\ (B -> C).
 Proof.
-intros.
+intro H.
 split.
-intro.
+intro I.
 apply H.
 left.
-exact H0.
-intro.
+exact I.
+intro I.
 apply H.
 right.
-exact H0.
+exact I.
 Qed.
  
 Theorem rozl_impl_rozdz_odw : (A -> C) /\ (B -> C) -> A \/ B -> C.
 Proof.
-intros.
-elim H0.
+intro H.
+intro I.
 elim H.
-intros.
-apply H1.
-exact H3.
-elim H.
-intros.
-apply H2.
-exact H3.
+elim I.
+intro J.
+intro K.
+intro L.
+apply K.
+exact J.
+intro J.
+intro K.
+intro L.
+apply L.
+exact J.
 Qed.
 
 Theorem curry : (A /\ B -> C) -> A -> B -> C.
 Proof.
-intros.apply H.
+intro H.
+intro I.
+intro J.
+apply H.
 split.
-exact H0.
-exact H1.
+exact I.
+exact J.
 Qed.
 
 Theorem uncurry : (A -> B -> C) -> A /\ B -> C.
 Proof.
-intros.
+intro H.
+intro I.
 apply H.
-elim H0.
-intros.
-exact H1.
-elim H0.
-intros.
-exact H2.
+elim I.
+intro J.
+intro K.
+exact J.
+elim I.
+intro J.
+intro K.
+exact K.
 Qed.
 
 End ZadanieOne.
